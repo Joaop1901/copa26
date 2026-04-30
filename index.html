@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendário da Copa do Mundo</title>
+  <link rel="stylesheet" href="js/css/stayle.css">
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <p class="tag">World Cup calendar</p>
+      <h1>Calendário da Copa do Mundo</h1>
+      <p class="subtitle">
+        Visualize os dias e horários dos jogos. Estrutura pronta para escalar com novas funções.
+      </p>
+    </header>
+
+    <section class="filtros">
+      <label for="filtro-time">Buscar por time</label>
+      <input id="filtro-time" type="text" placeholder="Ex.: Brasil, Argentina, Japão...">
+
+      <label for="filtro-fase">Fase</label>
+      <select id="filtro-fase">
+        <option value="todas">Todas</option>
+      </select>
+
+      <p class="contador">Jogos exibidos: <strong id="total-jogos">0</strong></p>
+    </section>
+
+    <section id="calendario" class="calendario" aria-live="polite"></section>
+  </main>
+
+  <script src="js/index.js" defer></script>
+</body>
+</html>
