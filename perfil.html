@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil - Copa 2026</title>
+  <link rel="stylesheet" href="js/css/perfil.css">
+</head>
+<body>
+  <main class="profile-page">
+    <header class="page-hero">
+      <p class="tag">Minha conta</p>
+      <h1>Perfil</h1>
+      <p>Edite seus dados, time favorito e preferências.</p>
+      <nav class="site-nav" data-auth-nav></nav>
+    </header>
+
+    <p id="profile-message" class="app-message" aria-live="polite"></p>
+
+    <section class="profile-grid">
+      <form id="profile-form" class="panel">
+        <h2>Dados do usuário</h2>
+        <label for="full-name">Nome completo</label>
+        <input id="full-name" type="text" placeholder="Seu nome">
+
+        <label for="username">Username</label>
+        <input id="username" type="text" placeholder="seu_usuario">
+
+        <label for="favorite-team">Time favorito</label>
+        <input id="favorite-team" type="text" placeholder="Ex.: Brasil">
+
+        <button type="submit">Salvar perfil</button>
+      </form>
+
+      <form id="preferences-form" class="panel">
+        <h2>Preferências</h2>
+        <label for="language">Idioma</label>
+        <select id="language">
+          <option value="pt-BR">pt-BR</option>
+          <option value="en-US">en-US</option>
+          <option value="es-ES">es-ES</option>
+        </select>
+
+        <label for="theme">Tema</label>
+        <select id="theme">
+          <option value="dark">dark</option>
+          <option value="light">light</option>
+        </select>
+
+        <label class="check-row">
+          <input id="receive-notifications" type="checkbox">
+          Receber notificações
+        </label>
+
+        <button type="submit">Salvar preferências</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabaseClient.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/userData.js"></script>
+  <script src="js/perfil.js"></script>
+</body>
+</html>

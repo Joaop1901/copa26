@@ -1,0 +1,162 @@
+:root {
+  --bg: #050b12;
+  --card: rgba(8, 18, 31, 0.92);
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #f8fafc;
+  --muted: #a1a8b3;
+  --pink: #ff2f7d;
+  --orange: #ff9f1c;
+  --coral: #ff6b5b;
+  --danger: #ff4d4d;
+  --success: #22c55e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255, 47, 125, 0.14), transparent 35%),
+    radial-gradient(circle at 40% 80%, rgba(255, 159, 28, 0.12), transparent 35%),
+    #050b12;
+}
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 430px;
+  padding: 34px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45), 0 0 45px rgba(255, 47, 125, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.tag {
+  margin: 0 0 10px;
+  color: var(--orange);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.75rem;
+}
+
+.login-header h1 {
+  margin: 0 0 10px;
+  font-size: 2rem;
+  color: #ff5f93;
+}
+
+.login-header p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.login-form,
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form {
+  gap: 16px;
+}
+
+.input-group {
+  gap: 8px;
+}
+
+.input-group label {
+  color: #e5e7eb;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.input-group input {
+  width: 100%;
+  border: 1px solid rgba(255, 107, 91, 0.28);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 14px 15px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input-group input:focus {
+  border-color: rgba(255, 47, 125, 0.8);
+  box-shadow: 0 0 0 4px rgba(255, 47, 125, 0.12);
+}
+
+.btn-primary,
+.btn-secondary {
+  width: 100%;
+  min-height: 46px;
+  border-radius: 8px;
+  padding: 0 16px;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.btn-primary {
+  border: 0;
+  color: white;
+  background: linear-gradient(135deg, var(--pink), var(--coral));
+}
+
+.btn-secondary {
+  color: white;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border);
+}
+
+.login-status {
+  min-height: 22px;
+  margin: 0;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.login-status.success {
+  color: var(--success);
+}
+
+.login-status.error {
+  color: var(--danger);
+}
+
+.login-footer {
+  margin-top: 22px;
+  text-align: center;
+}
+
+.login-footer a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.login-footer a:hover {
+  color: white;
+}

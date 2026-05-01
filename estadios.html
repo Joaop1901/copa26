@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa dos Estádios - Copa 2026</title>
+  <link rel="stylesheet" href="css/estadios.css">
+</head>
+<body>
+  <main class="mapa-page">
+    <header class="mapa-header">
+      <h1>16 Estádios • 3 Países</h1>
+      <p>Clique nos pontos luminosos para ver as informações dos estádios.</p>
+      <nav class="site-nav" data-auth-nav></nav>
+    </header>
+
+    <p id="app-message" class="app-message" aria-live="polite"></p>
+
+    <section class="mapa-wrapper">
+      <div class="mapa-base">
+        <div id="estadios-layer" class="estadios-layer"></div>
+
+        <div class="legenda">
+          <p><span class="dot usa-dot"></span> Estados Unidos — <strong>11 estádios</strong></p>
+          <p><span class="dot mexico-dot"></span> México — <strong>3 estádios</strong></p>
+          <p><span class="dot canada-dot"></span> Canadá — <strong>2 estádios</strong></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabaseClient.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/userData.js"></script>
+  <script src="js/estadios.js"></script>
+</body>
+</html>

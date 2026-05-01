@@ -1,0 +1,320 @@
+:root {
+  --bg: #050b12;
+  --card: rgba(5, 11, 18, 0.92);
+  --text: #f8fafc;
+  --muted: #a1a8b3;
+
+  --usa: #ff6b5b;
+  --mexico: #ff9f1c;
+  --canada: #ff2f7d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+.mapa-page {
+  position: relative;
+  min-height: 100svh;
+  padding: 24px;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.mapa-header {
+  position: relative;
+  z-index: 30;
+  text-align: center;
+  margin-bottom: 0;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.8);
+}
+
+.mapa-header h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #ff5f93;
+}
+
+.mapa-header p {
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.site-nav a,
+.site-nav button {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 107, 91, 0.5);
+  border-radius: 8px;
+  color: var(--text);
+  background: rgba(5, 11, 18, 0.62);
+  text-decoration: none;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.site-nav a:hover,
+.site-nav button:hover {
+  color: var(--mexico);
+  border-color: var(--mexico);
+}
+
+.app-message {
+  position: relative;
+  z-index: 30;
+  min-height: 22px;
+  margin: 10px auto 0;
+  color: var(--muted);
+  text-align: center;
+  font-weight: 800;
+}
+
+.app-message.success {
+  color: #22c55e;
+}
+
+.app-message.error {
+  color: #ff4d4d;
+}
+
+.mapa-wrapper {
+  position: absolute;
+  inset: 0;
+}
+
+.mapa-base {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  min-height: 100%;
+  border-radius: 0;
+  overflow: hidden;
+
+  background-image: url("../img/mapa-estadios.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  box-shadow: none;
+
+  border: 0;
+}
+
+.estadios-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+}
+
+.estadio-pin {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  background: var(--usa);
+  z-index: 8;
+
+  box-shadow:
+    0 0 0 5px rgba(255, 107, 91, 0.18),
+    0 0 18px rgba(255, 107, 91, 0.95),
+    0 0 38px rgba(255, 107, 91, 0.45);
+}
+
+.estadio-pin::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  background: white;
+  border-radius: 50%;
+}
+
+.estadio-pin.canada {
+  background: var(--canada);
+
+  box-shadow:
+    0 0 0 5px rgba(255, 47, 125, 0.18),
+    0 0 18px rgba(255, 47, 125, 0.95),
+    0 0 38px rgba(255, 47, 125, 0.45);
+}
+
+.estadio-pin.mexico {
+  background: var(--mexico);
+
+  box-shadow:
+    0 0 0 5px rgba(255, 159, 28, 0.18),
+    0 0 18px rgba(255, 159, 28, 0.95),
+    0 0 38px rgba(255, 159, 28, 0.45);
+}
+
+.estadio-pin.is-open {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.estadio-card {
+  position: absolute;
+  width: 255px;
+  padding: 13px 15px;
+  border-radius: 8px;
+  background: var(--card);
+  color: white;
+  border: 1px solid rgba(255, 107, 91, 0.78);
+
+  transform: translate(-50%, -125%) scale(0.95);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 12;
+  transition: 0.2s ease;
+
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.4),
+    0 0 25px rgba(255, 107, 91, 0.12);
+}
+
+.estadio-card.canada {
+  border-color: rgba(255, 47, 125, 0.9);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.4),
+    0 0 25px rgba(255, 47, 125, 0.14);
+}
+
+.estadio-card.mexico {
+  border-color: rgba(255, 159, 28, 0.9);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.4),
+    0 0 25px rgba(255, 159, 28, 0.14);
+}
+
+.estadio-card.is-open {
+  opacity: 1;
+  transform: translate(-50%, -135%) scale(1);
+}
+
+.estadio-card h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.estadio-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.estadio-card small {
+  display: block;
+  margin-top: 8px;
+  color: #d1d5db;
+  font-size: 0.75rem;
+}
+
+.favorite-stadium-btn {
+  width: 100%;
+  min-height: 36px;
+  margin-top: 12px;
+  border: 1px solid rgba(255, 159, 28, 0.42);
+  border-radius: 8px;
+  color: var(--text);
+  background: rgba(5, 11, 18, 0.68);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.favorite-stadium-btn.is-favorite {
+  color: var(--mexico);
+  border-color: var(--mexico);
+  box-shadow: 0 0 18px rgba(255, 159, 28, 0.18);
+}
+
+.legenda {
+  position: absolute;
+  left: 26px;
+  bottom: 24px;
+  z-index: 20;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(5, 11, 18, 0.55);
+  backdrop-filter: blur(8px);
+}
+
+.legenda p {
+  margin: 8px 0;
+  color: #e5e7eb;
+  font-size: 0.95rem;
+}
+
+.dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 9px;
+  vertical-align: middle;
+}
+
+.usa-dot {
+  background: var(--usa);
+  box-shadow: 0 0 14px var(--usa);
+}
+
+.mexico-dot {
+  background: var(--mexico);
+  box-shadow: 0 0 14px var(--mexico);
+}
+
+.canada-dot {
+  background: var(--canada);
+  box-shadow: 0 0 14px var(--canada);
+}
+
+@media (max-width: 900px) {
+  .estadio-card {
+    width: 220px;
+  }
+}
+
+@media (max-width: 600px) {
+  .mapa-page {
+    min-height: 1000px;
+    padding: 16px;
+  }
+
+  .mapa-header h1 {
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+  }
+
+  .estadio-card {
+    width: 190px;
+  }
+
+  .legenda {
+    left: 14px;
+    right: 14px;
+    bottom: 16px;
+  }
+}

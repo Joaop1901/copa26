@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meus Favoritos - Copa 2026</title>
+  <link rel="stylesheet" href="js/css/favoritos.css">
+</head>
+<body>
+  <main class="favorites-page">
+    <header class="page-hero">
+      <p class="tag">Minha Copa</p>
+      <h1>Meus Favoritos</h1>
+      <p>Jogos e estádios salvos na sua conta.</p>
+      <nav class="site-nav" data-auth-nav></nav>
+    </header>
+
+    <p id="favorites-message" class="app-message" aria-live="polite"></p>
+
+    <section class="favorites-grid">
+      <article class="panel">
+        <h2>Jogos favoritos</h2>
+        <div id="favorite-matches" class="cards-list"></div>
+      </article>
+
+      <article class="panel">
+        <h2>Estádios favoritos</h2>
+        <div id="favorite-stadiums" class="cards-list"></div>
+      </article>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabaseClient.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/userData.js"></script>
+  <script src="js/favoritos.js"></script>
+</body>
+</html>
