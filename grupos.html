@@ -4,23 +4,85 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grupos da Copa 2026</title>
+  <link rel="stylesheet" href="css/stayle.css">
   <link rel="stylesheet" href="css/grupos.css">
 </head>
 <body>
-  <main class="container">
-    <header class="hero">
-      <p class="tag">World Cup 2026</p>
-      <h1>Os 12 Grupos</h1>
-      <p class="subtitle">Veja a divisão oficial dos grupos da Copa do Mundo 2026.</p>
+  <div class="groups-bg"></div>
+
+  <main class="container groups-container">
+    <header class="top-shell groups-top-shell">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">26</span>
+        <span>
+          <strong>World Cup</strong>
+          <small>Groups Hub</small>
+        </span>
+      </a>
+
       <nav class="site-nav" data-auth-nav></nav>
     </header>
 
-    <section id="grupos" class="grupos"></section>
+    <section class="groups-hero">
+      <div class="groups-hero-content">
+        <p class="tag">World Cup 2026</p>
+
+        <h1>Os 12 Grupos</h1>
+
+        <p class="subtitle">
+          Escolha as seleções que você quer acompanhar. Os jogos dessas seleções serão destacados automaticamente no calendário.
+        </p>
+
+        <div class="groups-actions">
+          <a href="index.html" class="group-link primary">Ver calendário</a>
+          <a href="favoritos.html" class="group-link">Meus favoritos</a>
+        </div>
+      </div>
+
+      <aside class="groups-hero-panel">
+        <span class="panel-label">Acompanhamento inteligente</span>
+
+        <div class="panel-big-star">★</div>
+
+        <div class="panel-copy">
+          <strong>Selecione uma equipe</strong>
+          <span>O sistema marca automaticamente os jogos dela com estrela.</span>
+        </div>
+
+        <div class="group-stats">
+          <span>12 grupos</span>
+          <span>48 seleções</span>
+          <span>104 jogos</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="groups-summary">
+      <article>
+        <strong>Grupo A ao L</strong>
+        <span>Organização completa da fase de grupos.</span>
+      </article>
+
+      <article>
+        <strong>Bandeiras oficiais</strong>
+        <span>Identificação visual rápida por seleção.</span>
+      </article>
+
+      <article>
+        <strong>Favoritos automáticos</strong>
+        <span>Seleções acompanhadas refletem no calendário.</span>
+      </article>
+    </section>
+
+    <p id="app-message" class="app-message" aria-live="polite"></p>
+
+    <section id="grupos" class="grupos" aria-live="polite"></section>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabaseClient.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/userData.js"></script>
   <script src="js/grupos.js"></script>
 </body>
 </html>

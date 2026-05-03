@@ -8,17 +8,21 @@ const API_KEY = "SUA_API_KEY_AQUI";
 
 const calendarioEl = document.getElementById("calendario");
 const totalJogosEl = document.getElementById("total-jogos");
+const diasCopaEl = document.getElementById("dias-copa");
 const filtroTimeEl = document.getElementById("filtro-time");
 const filtroFaseEl = document.getElementById("filtro-fase");
 const viewButtons = document.querySelectorAll(".view-btn");
 const appMessageEl = document.getElementById("app-message");
-
-let todosJogos = [];
+const openingVideoOverlay = document.getElementById("opening-video-overlay");
+const openingVideo = document.getElementById("opening-video");
+const closeOpeningVideoBtn = document.getElementById("close-opening-video");
+const toggleOpeningSoundBtn = document.getElementById("toggle-opening-sound");
 let jogosAtuais = [];
 let visualizacaoAtual = "lista";
 let dataSelecionada = "";
 let usuarioAtual = null;
 let favoritosJogos = new Set();
+let selecoesAcompanhadas = [];
 
 const tradutorPaises = {
   brazil: "Brasil",
@@ -55,6 +59,27 @@ function gerarMatchKey(jogo) {
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
+}
+function atualizarContadorCopa() {
+  if (!diasCopaEl) return;
+
+  const dataAbertura = new Date("2026-06-11T16:00:00-03:00");
+  const agora = new Date();
+
+  const diferenca = dataAbertura - agora;
+  const dias = Math.ceil(diferenca / (1000 * 60 * 60 * 24));
+
+  if (dias > 0) {
+    diasCopaEl.textContent = dias;
+    return;
+  }
+
+  if (dias === 0) {
+    diasCopaEl.textContent = "Hoje";
+    return;
+  }
+
+  diasCopaEl.textContent = "Começou";
 }
 
 async function buscarDadosDaCopa() {
@@ -103,7 +128,10 @@ async function iniciarCalendario(jogos) {
   preencherFiltroDeFases(jogos);
   usuarioAtual = await getCurrentUser();
   await updateHeaderUser();
-  await carregarFavoritosJogos();
+  await Promise.all([
+    carregarFavoritosJogos(),
+    carregarSelecoesAcompanhadas()
+  ]);
   aplicarFiltros();
 }
 
@@ -148,6 +176,32 @@ async function carregarFavoritosJogos() {
   }
 }
 
+async function carregarSelecoesAcompanhadas() {
+  selecoesAcompanhadas = [];
+  if (!usuarioAtual) return;
+
+  try {
+    selecoesAcompanhadas = await userData.getFollowedTeams(usuarioAtual.id);
+  } catch (error) {
+    console.error("Erro ao carregar seleções acompanhadas:", error);
+  }
+}
+
+function jogoTemTimeAcompanhado(jogo) {
+  return selecoesAcompanhadas.some(team => {
+    return normalizar(jogo.home) === normalizar(team.team_name)
+        || normalizar(jogo.away) === normalizar(team.team_name);
+  });
+}
+
+function jogoTemEstrelaAtiva(jogo) {
+  const matchKey = gerarMatchKey(jogo);
+  const foiFavoritadoManual = favoritosJogos.has(matchKey);
+  const temTimeAcompanhado = jogoTemTimeAcompanhado(jogo);
+  
+  return foiFavoritadoManual || temTimeAcompanhado;
+}
+
 async function favoritarJogo(jogo) {
   const matchKey = gerarMatchKey(jogo);
 
@@ -177,14 +231,22 @@ async function alternarFavoritoJogo(jogo) {
   }
 
   const matchKey = gerarMatchKey(jogo);
+  const temTimeAcompanhado = jogoTemTimeAcompanhado(jogo);
+  const foiFavoritadoManual = favoritosJogos.has(matchKey);
 
   try {
-    if (favoritosJogos.has(matchKey)) {
+    if (foiFavoritadoManual) {
+      // Se foi favoritado manualmente, remove
       await removerFavoritoJogo(matchKey);
-      mostrarMensagem("Favorito removido.", "success");
+      mostrarMensagem("Jogo removido dos favoritos.", "success");
+    } else if (temTimeAcompanhado) {
+      // Se tem seleção acompanhada, mostra mensagem
+      mostrarMensagem("Este jogo está marcado porque você acompanha uma das seleções. Para remover, desmarque a seleção na página de grupos.", "error");
+      return;
     } else {
+      // Senão, favorita manualmente
       await favoritarJogo(jogo);
-      mostrarMensagem("Favorito salvo com sucesso.", "success");
+      mostrarMensagem("Jogo favoritado com sucesso.", "success");
     }
 
     atualizarVisualFavorito(matchKey);
@@ -261,11 +323,12 @@ function formatarHora(jogo) {
 
 function templateBotaoFavorito(jogo) {
   const matchKey = gerarMatchKey(jogo);
-  const favoritado = favoritosJogos.has(matchKey);
+  const temEstrela = jogoTemEstrelaAtiva(jogo);
+  const estrelaAtiva = favoritosJogos.has(matchKey);
 
   return `
-    <button class="favorite-match-btn ${favoritado ? "is-favorite" : ""}" type="button" data-favorite-match="${matchKey}" aria-label="Favoritar jogo">
-      ${favoritado ? "★" : "☆"}
+    <button class="favorite-match-btn ${temEstrela ? "is-favorite" : ""}" type="button" data-favorite-match="${matchKey}" aria-label="Favoritar jogo">
+      ${temEstrela ? "★" : "☆"}
     </button>
   `;
 }
@@ -448,4 +511,104 @@ calendarioEl.addEventListener("click", (event) => {
 filtroTimeEl.addEventListener("input", aplicarFiltros);
 filtroFaseEl.addEventListener("change", aplicarFiltros);
 
+
+function fecharVideoAbertura() {
+  if (!openingVideoOverlay) return;
+
+  openingVideoOverlay.classList.add("is-leaving");
+
+  setTimeout(() => {
+    openingVideoOverlay.hidden = true;
+    openingVideoOverlay.classList.remove("is-active", "is-leaving");
+
+    if (openingVideo) {
+      openingVideo.pause();
+      openingVideo.currentTime = 0;
+      openingVideo.muted = true;
+    }
+  }, 450);
+}
+
+function atualizarBotaoSom() {
+  if (!toggleOpeningSoundBtn || !openingVideo) return;
+
+  if (openingVideo.muted) {
+    toggleOpeningSoundBtn.textContent = "🔊 Ativar som";
+    toggleOpeningSoundBtn.classList.remove("is-muted-off");
+    return;
+  }
+
+  toggleOpeningSoundBtn.textContent = "🔇 Mutar";
+  toggleOpeningSoundBtn.classList.add("is-muted-off");
+}
+
+async function tentarTocarComSom() {
+  if (!openingVideo) return;
+
+  try {
+    openingVideo.currentTime = 0;
+    openingVideo.volume = 0.75;
+    openingVideo.muted = false;
+
+    await openingVideo.play();
+
+    atualizarBotaoSom();
+  } catch (error) {
+    console.warn("Navegador bloqueou autoplay com som. Iniciando mudo:", error);
+
+    try {
+      openingVideo.currentTime = 0;
+      openingVideo.volume = 0.75;
+      openingVideo.muted = true;
+
+      await openingVideo.play();
+
+      atualizarBotaoSom();
+    } catch (erroMudo) {
+      console.error("Erro ao iniciar vídeo de abertura:", erroMudo);
+    }
+  }
+}
+
+function iniciarVideoAbertura() {
+  const deveMostrar = sessionStorage.getItem("mostrarVideoAbertura");
+
+  if (deveMostrar !== "true") return;
+  if (!openingVideoOverlay || !openingVideo) return;
+
+  sessionStorage.removeItem("mostrarVideoAbertura");
+
+  openingVideoOverlay.hidden = false;
+
+  requestAnimationFrame(() => {
+    openingVideoOverlay.classList.add("is-active");
+    tentarTocarComSom();
+  });
+}
+
+if (toggleOpeningSoundBtn && openingVideo) {
+  toggleOpeningSoundBtn.addEventListener("click", async () => {
+    try {
+      openingVideo.muted = !openingVideo.muted;
+
+      if (openingVideo.paused) {
+        await openingVideo.play();
+      }
+
+      atualizarBotaoSom();
+    } catch (error) {
+      console.error("Erro ao alternar som do vídeo:", error);
+    }
+  });
+}
+
+if (closeOpeningVideoBtn) {
+  closeOpeningVideoBtn.addEventListener("click", fecharVideoAbertura);
+}
+
+if (openingVideo) {
+  openingVideo.addEventListener("ended", fecharVideoAbertura);
+}   
+atualizarContadorCopa();
+iniciarVideoAbertura();
 buscarDadosDaCopa();

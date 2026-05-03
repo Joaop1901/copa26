@@ -8,13 +8,6 @@
 </head>
 <body>
   <main class="mapa-page">
-    <header class="mapa-header">
-      <h1>16 Estádios • 3 Países</h1>
-      <p>Clique nos pontos luminosos para ver as informações dos estádios.</p>
-      <nav class="site-nav" data-auth-nav></nav>
-    </header>
-
-    <p id="app-message" class="app-message" aria-live="polite"></p>
 
     <section class="mapa-wrapper">
       <div class="mapa-base">
@@ -27,12 +20,59 @@
         </div>
       </div>
     </section>
+
+    <div class="mapa-interface">
+      <header class="mapa-topbar">
+        <a href="index.html" class="brand">
+          <span class="brand-mark">26</span>
+          <span>
+            <strong>World Cup</strong>
+            <small>Stadium Map</small>
+          </span>
+        </a>
+
+        <nav class="site-nav" data-auth-nav></nav>
+      </header>
+
+      <section class="mapa-floating-info">
+        <div class="mapa-title-card">
+          <p class="tag">Mapa interativo</p>
+          <h1>Estádios da Copa 2026</h1>
+          <p>Clique nos pontos luminosos para ver detalhes dos estádios.</p>
+        </div>
+
+        <aside class="mapa-stats-card">
+          <span class="info-label">Sedes oficiais</span>
+
+          <div class="info-number">
+            <strong>16</strong>
+            <span>estádios</span>
+          </div>
+
+          <div class="info-chips" aria-label="Filtrar estádios por país">
+            <button type="button" class="country-filter-btn" data-country-filter="canada">
+              Canadá
+            </button>
+
+            <button type="button" class="country-filter-btn" data-country-filter="usa">
+              EUA
+            </button>
+
+            <button type="button" class="country-filter-btn" data-country-filter="mexico">
+              México
+            </button>
+          </div>
+        </aside>
+      </section>
+
+      <p id="app-message" class="app-message" aria-live="polite"></p>
+    </div>
+
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabaseClient.js"></script>
   <script src="js/auth.js"></script>
-  <script src="js/userData.js"></script>
   <script src="js/estadios.js"></script>
 </body>
 </html>

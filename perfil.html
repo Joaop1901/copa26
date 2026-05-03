@@ -4,55 +4,157 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perfil - Copa 2026</title>
-  <link rel="stylesheet" href="js/css/perfil.css">
+  <link rel="stylesheet" href="css/perfil.css">
 </head>
 <body>
+  <div class="profile-bg"></div>
+
   <main class="profile-page">
-    <header class="page-hero">
-      <p class="tag">Minha conta</p>
-      <h1>Perfil</h1>
-      <p>Edite seus dados, time favorito e preferências.</p>
+    <header class="top-shell">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">26</span>
+        <span>
+          <strong>World Cup</strong>
+          <small>User Profile</small>
+        </span>
+      </a>
+
       <nav class="site-nav" data-auth-nav></nav>
     </header>
+
+    <section class="profile-hero">
+      <div class="hero-content">
+        <p class="tag">Minha conta</p>
+
+        <h1>Perfil</h1>
+
+        <p>
+          Personalize sua experiência na Copa 2026. Salve seu nome, username, foto de perfil, seleção favorita e preferências da conta.
+        </p>
+
+        <div class="hero-actions">
+          <a href="favoritos.html" class="hero-link primary">Meus favoritos</a>
+          <a href="grupos.html" class="hero-link">Escolher seleções</a>
+          <a href="index.html" class="hero-link">Ver calendário</a>
+        </div>
+      </div>
+
+      <aside class="hero-panel">
+        <span class="panel-label">Conta conectada</span>
+
+        <div class="profile-avatar hero-avatar">
+          <img id="hero-avatar-preview" src="" alt="Foto de perfil">
+          <span id="hero-avatar-placeholder">👤</span>
+        </div>
+
+        <div class="panel-copy">
+          <strong>Preferências salvas</strong>
+          <span>Seus dados ficam ligados à sua conta Supabase.</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="profile-summary">
+      <article>
+        <strong>Perfil</strong>
+        <span>Nome, username, foto e seleção favorita.</span>
+      </article>
+
+      <article>
+        <strong>Preferências</strong>
+        <span>Idioma, tema e notificações futuras.</span>
+      </article>
+
+      <article>
+        <strong>Conta segura</strong>
+        <span>Dados separados por usuário logado.</span>
+      </article>
+    </section>
 
     <p id="profile-message" class="app-message" aria-live="polite"></p>
 
     <section class="profile-grid">
       <form id="profile-form" class="panel">
-        <h2>Dados do usuário</h2>
-        <label for="full-name">Nome completo</label>
-        <input id="full-name" type="text" placeholder="Seu nome">
+        <div class="panel-header">
+          <span class="panel-icon">✦</span>
+          <div>
+            <h2>Dados do usuário</h2>
+            <p>Essas informações ajudam a personalizar sua experiência no site.</p>
+          </div>
+        </div>
 
-        <label for="username">Username</label>
-        <input id="username" type="text" placeholder="seu_usuario">
+        <div class="avatar-editor">
+          <div class="avatar-preview">
+            <img id="avatar-preview" src="" alt="Prévia da foto de perfil">
+            <span id="avatar-placeholder">👤</span>
+          </div>
 
-        <label for="favorite-team">Time favorito</label>
-        <input id="favorite-team" type="text" placeholder="Ex.: Brasil">
+          <div class="avatar-actions">
+            <label for="avatar-file" class="avatar-upload-btn">
+              Escolher foto
+            </label>
 
-        <button type="submit">Salvar perfil</button>
+            <input id="avatar-file" type="file" accept="image/*">
+
+            <small>
+              Use JPG, PNG ou WEBP. Tamanho recomendado: até 2MB.
+            </small>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="full-name">Nome completo</label>
+          <input id="full-name" type="text" placeholder="Seu nome">
+        </div>
+
+        <div class="field">
+          <label for="username">Username</label>
+          <input id="username" type="text" placeholder="seu_usuario">
+        </div>
+
+        <div class="field">
+          <label for="favorite-team">Seleção favorita</label>
+          <input id="favorite-team" type="text" placeholder="Ex.: Brasil">
+        </div>
+
+        <button type="submit" class="primary-btn">Salvar perfil</button>
       </form>
 
       <form id="preferences-form" class="panel">
-        <h2>Preferências</h2>
-        <label for="language">Idioma</label>
-        <select id="language">
-          <option value="pt-BR">pt-BR</option>
-          <option value="en-US">en-US</option>
-          <option value="es-ES">es-ES</option>
-        </select>
+        <div class="panel-header">
+          <span class="panel-icon">⚙</span>
+          <div>
+            <h2>Preferências</h2>
+            <p>Configure como você quer acompanhar as informações da Copa.</p>
+          </div>
+        </div>
 
-        <label for="theme">Tema</label>
-        <select id="theme">
-          <option value="dark">dark</option>
-          <option value="light">light</option>
-        </select>
+        <div class="field">
+          <label for="language">Idioma</label>
+          <select id="language">
+            <option value="pt-BR">Português do Brasil</option>
+            <option value="en-US">English</option>
+            <option value="es-ES">Español</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="theme">Tema</label>
+          <select id="theme">
+            <option value="dark">Escuro</option>
+            <option value="light">Claro</option>
+          </select>
+        </div>
 
         <label class="check-row">
           <input id="receive-notifications" type="checkbox">
-          Receber notificações
+          <span>
+            <strong>Receber notificações</strong>
+            <small>Para lembretes e atualizações futuras dos jogos.</small>
+          </span>
         </label>
 
-        <button type="submit">Salvar preferências</button>
+        <button type="submit" class="primary-btn">Salvar preferências</button>
       </form>
     </section>
   </main>
