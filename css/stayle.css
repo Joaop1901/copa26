@@ -1161,6 +1161,7 @@ select:focus {
     height: 44px;
     font-size: 1.8rem;
   }
+<<<<<<< HEAD
 }
 
 /* Ajustes de fluidez para telas muito estreitas e dimensoes incomuns */
@@ -1285,3 +1286,6 @@ textarea {
     padding: 14px;
   }
 }
+=======
+}
+>>>>>>> e790bc1fd37f666725af3369461776a3b880de05

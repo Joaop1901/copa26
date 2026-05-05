@@ -543,6 +543,7 @@ select {
   .news-grid {
     grid-template-columns: 1fr;
   }
+<<<<<<< HEAD
 }
 
 /* Ajustes de fluidez para telas muito estreitas e dimensoes incomuns */
@@ -660,3 +661,6 @@ textarea {
     padding: 14px;
   }
 }
+=======
+}
+>>>>>>> e790bc1fd37f666725af3369461776a3b880de05

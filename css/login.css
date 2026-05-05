@@ -463,6 +463,7 @@ body::after {
   .login-header h2 {
     font-size: 2.2rem;
   }
+<<<<<<< HEAD
 }
 
 /* Ajustes de fluidez para telas muito estreitas e dimensoes incomuns */
@@ -565,3 +566,6 @@ textarea {
     margin-bottom: 128px;
   }
 }
+=======
+}
+>>>>>>> e790bc1fd37f666725af3369461776a3b880de05

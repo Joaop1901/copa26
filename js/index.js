@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const MODO = "local";
+=======
+const MODO = "auto";
+>>>>>>> e790bc1fd37f666725af3369461776a3b880de05
 // "api" = forca API
 // "local" = forca JSON
 // "auto" = tenta API e cai pro JSON
@@ -17,7 +21,10 @@ const openingVideoOverlay = document.getElementById("opening-video-overlay");
 const openingVideo = document.getElementById("opening-video");
 const closeOpeningVideoBtn = document.getElementById("close-opening-video");
 const toggleOpeningSoundBtn = document.getElementById("toggle-opening-sound");
+<<<<<<< HEAD
 let todosJogos = [];
+=======
+>>>>>>> e790bc1fd37f666725af3369461776a3b880de05
 let jogosAtuais = [];
 let visualizacaoAtual = "lista";
 let dataSelecionada = "";
@@ -258,12 +265,19 @@ async function alternarFavoritoJogo(jogo) {
 }
 
 function atualizarVisualFavorito(matchKey) {
+<<<<<<< HEAD
   const jogo = encontrarJogoPorMatchKey(matchKey);
   const temEstrela = jogo ? jogoTemEstrelaAtiva(jogo) : favoritosJogos.has(matchKey);
 
   document.querySelectorAll(`[data-favorite-match="${matchKey}"]`).forEach(button => {
     button.classList.toggle("is-favorite", temEstrela);
     button.textContent = temEstrela ? "★" : "☆";
+=======
+  document.querySelectorAll(`[data-favorite-match="${matchKey}"]`).forEach(button => {
+    const favoritado = favoritosJogos.has(matchKey);
+    button.classList.toggle("is-favorite", favoritado);
+    button.textContent = favoritado ? "★" : "☆";
+>>>>>>> e790bc1fd37f666725af3369461776a3b880de05
   });
 }
 
@@ -327,10 +341,17 @@ function formatarHora(jogo) {
 function templateBotaoFavorito(jogo) {
   const matchKey = gerarMatchKey(jogo);
   const temEstrela = jogoTemEstrelaAtiva(jogo);
+<<<<<<< HEAD
   const textoAcessivel = temEstrela ? "Jogo marcado como favorito" : "Favoritar jogo";
 
   return `
     <button class="favorite-match-btn ${temEstrela ? "is-favorite" : ""}" type="button" data-favorite-match="${matchKey}" aria-label="${textoAcessivel}" title="${textoAcessivel}">
+=======
+  const estrelaAtiva = favoritosJogos.has(matchKey);
+
+  return `
+    <button class="favorite-match-btn ${temEstrela ? "is-favorite" : ""}" type="button" data-favorite-match="${matchKey}" aria-label="Favoritar jogo">
+>>>>>>> e790bc1fd37f666725af3369461776a3b880de05
       ${temEstrela ? "★" : "☆"}
     </button>
   `;
