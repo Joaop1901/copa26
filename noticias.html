@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#050b12">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Copa 2026">
+  <link rel="apple-touch-icon" href="img/icon-192.png">
+  <title>Notícias da Copa 2026</title>
+  <link rel="stylesheet" href="css/noticias.css">
+</head>
+<body>
+  <div class="news-bg"></div>
+
+  <main class="news-page">
+    <header class="top-shell">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">26</span>
+        <span>
+          <strong>World Cup</strong>
+          <small>News Hub</small>
+        </span>
+      </a>
+
+      <nav class="site-nav" data-auth-nav></nav>
+    </header>
+
+    <section class="news-hero">
+      <div class="hero-content">
+        <p class="tag">Notícias da Copa</p>
+
+        <h1>Últimas notícias da Copa 2026</h1>
+
+        <p>
+          Acompanhe notícias sobre seleções, estádios, grupos, preparação e bastidores da Copa do Mundo FIFA 2026.
+        </p>
+
+        <div class="hero-actions">
+          <a href="index.html" class="hero-link primary">Ver calendário</a>
+          <a href="grupos.html" class="hero-link">Ver grupos</a>
+          <a href="estadios.html" class="hero-link">Mapa dos estádios</a>
+        </div>
+      </div>
+
+      <aside class="hero-panel">
+        <span class="panel-label">Central de notícias</span>
+
+        <div class="news-icon">📰</div>
+
+        <div class="panel-copy">
+          <strong>Copa em tempo real</strong>
+          <span>Notícias carregadas por API com fallback local.</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="news-tools">
+      <div class="field">
+        <label for="news-search">Buscar notícia</label>
+        <input id="news-search" type="text" placeholder="Ex.: Brasil, estádio, grupos, FIFA...">
+      </div>
+
+      <div class="field">
+        <label for="news-topic">Tema</label>
+        <select id="news-topic">
+          <option value="fifa world cup 2026">Copa do Mundo 2026</option>
+          <option value="seleção brasileira copa 2026">Seleção Brasileira</option>
+          <option value="fifa world cup 2026 stadiums">Estádios</option>
+          <option value="fifa world cup 2026 groups">Grupos</option>
+          <option value="fifa world cup 2026 tickets">Ingressos</option>
+        </select>
+      </div>
+
+      <button id="reload-news" type="button" class="reload-btn">
+        Atualizar notícias
+      </button>
+    </section>
+
+    <p id="news-message" class="app-message" aria-live="polite"></p>
+
+    <section id="news-list" class="news-grid" aria-live="polite"></section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabaseClient.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/noticias.js"></script>
+  <script src="js/pwa.js"></script>
+</body>
+</html>

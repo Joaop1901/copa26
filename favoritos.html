@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#050b12">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Copa 2026">
+  <link rel="apple-touch-icon" href="img/icon-192.png">
+  <title>Meus Favoritos - Copa 2026</title>
+  <link rel="stylesheet" href="css/favoritos.css">
+</head>
+<body>
+  <div class="favorites-bg"></div>
+
+  <main class="favorites-page">
+    <header class="top-shell">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">26</span>
+        <span>
+          <strong>World Cup</strong>
+          <small>My Favorites</small>
+        </span>
+      </a>
+
+      <nav class="site-nav" data-auth-nav></nav>
+    </header>
+
+    <section class="favorites-hero">
+      <div class="hero-content">
+        <p class="tag">Minha Copa</p>
+
+        <h1>Meus Favoritos</h1>
+
+        <p>
+          Acompanhe em um só lugar seus jogos marcados, seleções escolhidas e estádios favoritos da Copa do Mundo 2026.
+        </p>
+
+        <div class="hero-actions">
+          <a href="index.html" class="hero-link primary">Ver calendário</a>
+          <a href="grupos.html" class="hero-link">Escolher seleções</a>
+          <a href="estadios.html" class="hero-link">Mapa dos estádios</a>
+        </div>
+      </div>
+
+      <aside class="hero-panel">
+        <span class="panel-label">Central do torcedor</span>
+
+        <div class="panel-star">★</div>
+
+        <div class="panel-copy">
+          <strong>Tudo salvo na sua conta</strong>
+          <span>Jogos, seleções e estádios ficam organizados aqui.</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="favorites-summary">
+      <article>
+        <strong>Jogos manuais</strong>
+        <span>Partidas que você marcou individualmente.</span>
+      </article>
+
+      <article>
+        <strong>Seleções seguidas</strong>
+        <span>Times que destacam jogos automaticamente.</span>
+      </article>
+
+      <article>
+        <strong>Estádios favoritos</strong>
+        <span>Sedes escolhidas no mapa interativo.</span>
+      </article>
+    </section>
+
+    <p id="favorites-message" class="app-message" aria-live="polite"></p>
+
+    <section class="favorites-grid">
+      <article class="panel panel-manual">
+        <div class="panel-header">
+          <span class="panel-icon">★</span>
+          <div>
+            <h2>Jogos favoritos manuais</h2>
+            <p>Jogos que você marcou diretamente no calendário.</p>
+          </div>
+        </div>
+
+        <div id="favorite-matches" class="cards-list"></div>
+      </article>
+
+      <article class="panel panel-teams">
+        <div class="panel-header">
+          <span class="panel-icon">⚑</span>
+          <div>
+            <h2>Seleções acompanhadas</h2>
+            <p>Seleções que você escolheu na página de grupos.</p>
+          </div>
+        </div>
+
+        <div id="followed-teams" class="cards-list"></div>
+      </article>
+
+      <article class="panel panel-auto">
+        <div class="panel-header">
+          <span class="panel-icon">✦</span>
+          <div>
+            <h2>Jogos das seleções acompanhadas</h2>
+            <p>Partidas marcadas automaticamente pelas seleções que você segue.</p>
+          </div>
+        </div>
+
+        <div id="automatic-matches" class="cards-list"></div>
+      </article>
+
+      <article class="panel panel-stadiums">
+        <div class="panel-header">
+          <span class="panel-icon">⌖</span>
+          <div>
+            <h2>Estádios favoritos</h2>
+            <p>Estádios salvos a partir do mapa da Copa.</p>
+          </div>
+        </div>
+
+        <div id="favorite-stadiums" class="cards-list"></div>
+      </article>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabaseClient.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/favoritos.js"></script>
+  <script src="js/pwa.js"></script>
+</body>
+</html>

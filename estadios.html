@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#050b12">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Copa 2026">
+  <link rel="apple-touch-icon" href="img/icon-192.png">
+  <title>Mapa dos Estádios - Copa 2026</title>
+  <link rel="stylesheet" href="css/estadios.css">
+</head>
+<body>
+  <main class="mapa-page">
+
+    <section class="mapa-wrapper">
+      <div class="mapa-base">
+        <div id="estadios-layer" class="estadios-layer"></div>
+
+        <div class="legenda">
+          <p><span class="dot usa-dot"></span> Estados Unidos — <strong>11 estádios</strong></p>
+          <p><span class="dot mexico-dot"></span> México — <strong>3 estádios</strong></p>
+          <p><span class="dot canada-dot"></span> Canadá — <strong>2 estádios</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <div class="mapa-interface">
+      <header class="mapa-topbar">
+        <a href="index.html" class="brand">
+          <span class="brand-mark">26</span>
+          <span>
+            <strong>World Cup</strong>
+            <small>Stadium Map</small>
+          </span>
+        </a>
+
+        <nav class="site-nav" data-auth-nav></nav>
+      </header>
+
+      <section class="mapa-floating-info">
+        <div class="mapa-title-card">
+          <p class="tag">Mapa interativo</p>
+          <h1>Estádios da Copa 2026</h1>
+          <p>Clique nos pontos luminosos para ver detalhes dos estádios.</p>
+        </div>
+
+        <aside class="mapa-stats-card">
+          <span class="info-label">Sedes oficiais</span>
+
+          <div class="info-number">
+            <strong>16</strong>
+            <span>estádios</span>
+          </div>
+
+          <div class="info-chips" aria-label="Filtrar estádios por país">
+            <button type="button" class="country-filter-btn" data-country-filter="canada">
+              Canadá
+            </button>
+
+            <button type="button" class="country-filter-btn" data-country-filter="usa">
+              EUA
+            </button>
+
+            <button type="button" class="country-filter-btn" data-country-filter="mexico">
+              México
+            </button>
+          </div>
+        </aside>
+      </section>
+
+      <p id="app-message" class="app-message" aria-live="polite"></p>
+    </div>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabaseClient.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/estadios.js"></script>
+  <script src="js/pwa.js"></script>
+</body>
+</html>

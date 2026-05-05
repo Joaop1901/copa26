@@ -1,0 +1,12 @@
+{
+  "name": "calendario-copa-2026-desktop",
+  "version": "1.0.0",
+  "description": "Versão desktop do Calendário da Copa 2026 usando Electron.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^31.0.0"
+  }
+}

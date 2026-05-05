@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#050b12">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Copa 2026">
+  <link rel="apple-touch-icon" href="img/icon-192.png">
+  <title>Grupos da Copa 2026</title>
+  <link rel="stylesheet" href="css/stayle.css">
+  <link rel="stylesheet" href="css/grupos.css">
+</head>
+<body>
+  <div class="groups-bg"></div>
+
+  <main class="container groups-container">
+    <header class="top-shell groups-top-shell">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">26</span>
+        <span>
+          <strong>World Cup</strong>
+          <small>Groups Hub</small>
+        </span>
+      </a>
+
+      <nav class="site-nav" data-auth-nav></nav>
+    </header>
+
+    <section class="groups-hero">
+      <div class="groups-hero-content">
+        <p class="tag">World Cup 2026</p>
+
+        <h1>Os 12 Grupos</h1>
+
+        <p class="subtitle">
+          Escolha as seleções que você quer acompanhar. Os jogos dessas seleções serão destacados automaticamente no calendário.
+        </p>
+
+        <div class="groups-actions">
+          <a href="index.html" class="group-link primary">Ver calendário</a>
+          <a href="favoritos.html" class="group-link">Meus favoritos</a>
+        </div>
+      </div>
+
+      <aside class="groups-hero-panel">
+        <span class="panel-label">Acompanhamento inteligente</span>
+
+        <div class="panel-big-star">★</div>
+
+        <div class="panel-copy">
+          <strong>Selecione uma equipe</strong>
+          <span>O sistema marca automaticamente os jogos dela com estrela.</span>
+        </div>
+
+        <div class="group-stats">
+          <span>12 grupos</span>
+          <span>48 seleções</span>
+          <span>104 jogos</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="groups-summary">
+      <article>
+        <strong>Grupo A ao L</strong>
+        <span>Organização completa da fase de grupos.</span>
+      </article>
+
+      <article>
+        <strong>Bandeiras oficiais</strong>
+        <span>Identificação visual rápida por seleção.</span>
+      </article>
+
+      <article>
+        <strong>Favoritos automáticos</strong>
+        <span>Seleções acompanhadas refletem no calendário.</span>
+      </article>
+    </section>
+
+    <p id="app-message" class="app-message" aria-live="polite"></p>
+
+    <section id="grupos" class="grupos" aria-live="polite"></section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabaseClient.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/userData.js"></script>
+  <script src="js/grupos.js"></script>
+  <script src="js/pwa.js"></script>
+</body>
+</html>

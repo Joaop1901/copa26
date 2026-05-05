@@ -1,0 +1,846 @@
+:root {
+  --bg: #050b12;
+  --glass: rgba(5, 11, 18, 0.58);
+  --glass-strong: rgba(5, 11, 18, 0.78);
+  --card: rgba(5, 11, 18, 0.92);
+  --text: #f8fafc;
+  --muted: #a1a8b3;
+  --soft: #cbd5e1;
+  --border: rgba(255, 255, 255, 0.1);
+
+  --usa: #ff6b5b;
+  --mexico: #ff9f1c;
+  --canada: #ff2f7d;
+  --cyan: #19e6d2;
+  --green: #22c55e;
+  --red: #ff4d4d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+.mapa-page {
+  position: relative;
+  min-height: 100svh;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+/* MAPA */
+
+.mapa-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
+
+.mapa-base {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(5, 11, 18, 0.28) 0%,
+      rgba(5, 11, 18, 0.03) 36%,
+      rgba(5, 11, 18, 0.04) 70%,
+      rgba(5, 11, 18, 0.30) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(5, 11, 18, 0.46) 0%,
+      rgba(5, 11, 18, 0.02) 28%,
+      rgba(5, 11, 18, 0.04) 70%,
+      rgba(5, 11, 18, 0.54) 100%
+    ),
+    url("../img/mapa-estadios.png");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 0;
+}
+
+.mapa-base::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+  background-size: 72px 72px;
+  opacity: 0.9;
+}
+
+.estadios-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+}
+
+/* INTERFACE */
+
+.mapa-interface {
+  position: relative;
+  z-index: 30;
+  width: min(1320px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 18px 0;
+  pointer-events: none;
+}
+
+.mapa-topbar,
+.mapa-floating-info,
+.app-message {
+  pointer-events: auto;
+}
+
+.mapa-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(5, 11, 18, 0.62);
+  backdrop-filter: blur(18px);
+  box-shadow:
+    0 16px 42px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text);
+  text-decoration: none;
+  min-width: max-content;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  color: white;
+  font-weight: 950;
+  letter-spacing: -1px;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255,255,255,0.34), transparent 26%),
+    linear-gradient(135deg, var(--canada), var(--usa), var(--mexico));
+  box-shadow:
+    0 0 22px rgba(255, 47, 125, 0.38),
+    0 0 38px rgba(255, 159, 28, 0.14);
+}
+
+.brand strong {
+  display: block;
+  font-size: 0.98rem;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.brand small {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+}
+
+.site-nav a,
+.site-nav button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: var(--soft);
+  text-decoration: none;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 800;
+  background: transparent;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.site-nav a:hover,
+.site-nav button:hover {
+  color: white;
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.site-nav a[href*="login"],
+.site-nav button {
+  color: white;
+  border-color: rgba(255, 159, 28, 0.36);
+  background: rgba(255, 159, 28, 0.1);
+}
+
+.site-nav a[href*="favoritos"],
+.site-nav a[href*="perfil"] {
+  border-color: rgba(255, 47, 125, 0.28);
+  background: rgba(255, 47, 125, 0.09);
+}
+
+/* BLOCO PEQUENO, SEM TAPAR O MAPA */
+
+.mapa-floating-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.mapa-title-card {
+  width: min(420px, 100%);
+  padding: 18px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.085);
+  border-radius: 22px;
+  background:
+    linear-gradient(135deg, rgba(255, 47, 125, 0.10), rgba(255, 107, 91, 0.05), rgba(255, 159, 28, 0.06)),
+    rgba(5, 11, 18, 0.50);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 18px 52px rgba(0, 0, 0, 0.24);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.8);
+}
+
+.tag {
+  margin: 0 0 8px;
+  color: var(--mexico);
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.mapa-title-card h1 {
+  margin: 0;
+  max-width: 390px;
+  font-size: clamp(1.8rem, 3.4vw, 3.1rem);
+  line-height: 0.95;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: #ff5f93;
+  text-shadow:
+    0 0 28px rgba(255, 47, 125, 0.16),
+    0 2px 18px rgba(0, 0, 0, 0.8);
+}
+
+.mapa-title-card p {
+  max-width: 380px;
+  margin: 12px 0 0;
+  color: var(--soft);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  font-weight: 650;
+}
+
+.mapa-stats-card {
+  width: 220px;
+  min-height: 150px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.085);
+  border-radius: 22px;
+  background: rgba(5, 11, 18, 0.54);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 18px 52px rgba(0, 0, 0, 0.22);
+}
+
+.info-label {
+  width: fit-content;
+  padding: 6px 9px;
+  border: 1px solid rgba(25, 230, 210, 0.22);
+  border-radius: 999px;
+  color: var(--cyan);
+  background: rgba(25, 230, 210, 0.07);
+  font-size: 0.68rem;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.info-number {
+  display: grid;
+  gap: 3px;
+  margin-top: 18px;
+}
+
+.info-number strong {
+  color: white;
+  font-size: 3.5rem;
+  line-height: 0.85;
+  letter-spacing: -4px;
+}
+
+.info-number span {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+}
+
+.info-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.info-chips span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 9px;
+  border: 1px solid rgba(255, 159, 28, 0.20);
+  border-radius: 999px;
+  color: var(--soft);
+  background: rgba(255, 159, 28, 0.07);
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+/* MENSAGEM */
+
+.app-message {
+  min-height: 26px;
+  margin: 10px 0 0;
+  color: var(--muted);
+  text-align: center;
+  font-weight: 850;
+}
+
+.app-message.success {
+  color: var(--green);
+}
+
+.app-message.error {
+  color: var(--red);
+}
+
+/* PINS */
+
+.estadio-pin {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  background: var(--usa);
+  z-index: 8;
+  transition: 0.2s ease;
+  box-shadow:
+    0 0 0 5px rgba(255, 107, 91, 0.18),
+    0 0 18px rgba(255, 107, 91, 0.95),
+    0 0 38px rgba(255, 107, 91, 0.45);
+}
+
+.estadio-pin::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 107, 91, 0.22);
+  animation: pulsePin 2.4s ease-out infinite;
+}
+
+.estadio-pin::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  background: white;
+  border-radius: 50%;
+}
+
+.estadio-pin:hover,
+.estadio-pin.is-open {
+  transform: translate(-50%, -50%) scale(1.22);
+}
+
+.estadio-pin.canada {
+  background: var(--canada);
+  box-shadow:
+    0 0 0 5px rgba(255, 47, 125, 0.18),
+    0 0 18px rgba(255, 47, 125, 0.95),
+    0 0 38px rgba(255, 47, 125, 0.45);
+}
+
+.estadio-pin.canada::before {
+  border-color: rgba(255, 47, 125, 0.22);
+}
+
+.estadio-pin.mexico {
+  background: var(--mexico);
+  box-shadow:
+    0 0 0 5px rgba(255, 159, 28, 0.18),
+    0 0 18px rgba(255, 159, 28, 0.95),
+    0 0 38px rgba(255, 159, 28, 0.45);
+}
+
+.estadio-pin.mexico::before {
+  border-color: rgba(255, 159, 28, 0.22);
+}
+
+@keyframes pulsePin {
+  0% {
+    transform: scale(0.55);
+    opacity: 0.75;
+  }
+
+  100% {
+    transform: scale(1.75);
+    opacity: 0;
+  }
+}
+
+/* CARD DOS ESTÁDIOS */
+
+.estadio-card {
+  position: absolute;
+  width: 270px;
+  padding: 15px;
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.045), transparent),
+    var(--card);
+  color: white;
+  border: 1px solid rgba(255, 107, 91, 0.62);
+  transform: translate(-50%, -125%) scale(0.95);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 12;
+  transition: 0.2s ease;
+  backdrop-filter: blur(14px);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.44),
+    0 0 25px rgba(255, 107, 91, 0.12);
+}
+
+.estadio-card.canada {
+  border-color: rgba(255, 47, 125, 0.82);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.44),
+    0 0 25px rgba(255, 47, 125, 0.14);
+}
+
+.estadio-card.mexico {
+  border-color: rgba(255, 159, 28, 0.86);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.44),
+    0 0 25px rgba(255, 159, 28, 0.14);
+}
+
+.estadio-card.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -135%) scale(1);
+}
+
+.estadio-card h3 {
+  margin: 0 0 7px;
+  color: white;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.estadio-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.estadio-card small {
+  display: block;
+  width: fit-content;
+  margin-top: 9px;
+  padding: 5px 9px;
+  border: 1px solid rgba(255, 159, 28, 0.22);
+  border-radius: 999px;
+  color: var(--soft);
+  background: rgba(255, 159, 28, 0.07);
+  font-size: 0.74rem;
+  font-weight: 850;
+}
+
+.favorite-stadium-btn {
+  width: 100%;
+  min-height: 40px;
+  margin-top: 13px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 12px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 900;
+  transition: 0.2s ease;
+}
+
+.favorite-stadium-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-1px);
+}
+
+.favorite-stadium-btn.is-favorite {
+  color: #ffcf4a;
+  border-color: rgba(255, 207, 74, 0.48);
+  background: rgba(255, 207, 74, 0.12);
+  box-shadow: 0 0 18px rgba(255, 207, 74, 0.14);
+}
+
+/* LEGENDA */
+
+.legenda {
+  position: absolute;
+  left: 26px;
+  bottom: 24px;
+  z-index: 20;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  background: rgba(5, 11, 18, 0.58);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+}
+
+.legenda p {
+  margin: 8px 0;
+  color: #e5e7eb;
+  font-size: 0.94rem;
+  font-weight: 750;
+}
+
+.dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 9px;
+  vertical-align: middle;
+}
+
+.usa-dot {
+  background: var(--usa);
+  box-shadow: 0 0 14px var(--usa);
+}
+
+.mexico-dot {
+  background: var(--mexico);
+  box-shadow: 0 0 14px var(--mexico);
+}
+
+.canada-dot {
+  background: var(--canada);
+  box-shadow: 0 0 14px var(--canada);
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 980px) {
+  .mapa-interface {
+    width: min(100% - 24px, 1320px);
+    padding-top: 12px;
+  }
+
+  .mapa-topbar {
+    align-items: stretch;
+    flex-direction: column;
+    border-radius: 24px;
+  }
+
+  .site-nav {
+    justify-content: flex-start;
+  }
+
+  .mapa-floating-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mapa-title-card,
+  .mapa-stats-card {
+    width: min(100%, 420px);
+  }
+
+  .estadio-card {
+    width: 230px;
+  }
+}
+
+@media (max-width: 680px) {
+  .mapa-page {
+    min-height: 1000px;
+  }
+
+  .mapa-title-card {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .mapa-title-card h1 {
+    font-size: clamp(1.8rem, 10vw, 2.9rem);
+    letter-spacing: -0.8px;
+  }
+
+  .brand-mark {
+    width: 42px;
+    height: 42px;
+  }
+
+  .site-nav {
+    gap: 6px;
+  }
+
+  .site-nav a,
+  .site-nav button {
+    min-height: 36px;
+    padding: 0 11px;
+    font-size: 0.8rem;
+  }
+
+  .estadio-card {
+    width: 205px;
+  }
+
+  .legenda {
+    left: 14px;
+    right: 14px;
+    bottom: 16px;
+  }
+
+  .legenda p {
+    font-size: 0.86rem;
+  }
+}
+.country-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 9px;
+  border: 1px solid rgba(255, 159, 28, 0.20);
+  border-radius: 999px;
+  color: var(--soft);
+  background: rgba(255, 159, 28, 0.07);
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 850;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.country-filter-btn:hover {
+  color: white;
+  border-color: rgba(255, 159, 28, 0.55);
+  background: rgba(255, 159, 28, 0.14);
+  transform: translateY(-1px);
+}
+
+.country-filter-btn.is-active {
+  color: #050b12;
+  border-color: rgba(25, 230, 210, 0.8);
+  background: linear-gradient(135deg, var(--cyan), #9ffcf3);
+  box-shadow:
+    0 0 18px rgba(25, 230, 210, 0.18),
+    inset 0 0 18px rgba(255, 255, 255, 0.18);
+}
+/* =====================================================
+   CORREÇÃO DOS CARDS DOS PINS
+   Abre lateralmente e fica acima dos cards da interface
+===================================================== */
+
+.mapa-wrapper {
+  z-index: auto;
+  pointer-events: none;
+}
+
+.mapa-base {
+  z-index: 1;
+  pointer-events: none;
+}
+
+.estadios-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+}
+
+.estadio-pin {
+  pointer-events: auto;
+  z-index: 82;
+}
+
+.estadio-card {
+  z-index: 90;
+  pointer-events: none;
+  transform: translate(0, -50%) scale(0.96);
+  transform-origin: left center;
+}
+
+.estadio-card.is-open {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translate(0, -50%) scale(1);
+}
+
+.estadio-card.open-left {
+  transform: translate(-100%, -50%) scale(0.96);
+  transform-origin: right center;
+}
+
+.estadio-card.open-left.is-open {
+  transform: translate(-100%, -50%) scale(1);
+}
+
+/* Ajustes de fluidez para telas muito estreitas e dimensoes incomuns */
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  min-width: 0;
+}
+
+.brand,
+.site-nav,
+.mapa-topbar,
+.mapa-floating-info,
+.mapa-title-card,
+.mapa-stats-card,
+.estadio-card,
+.legenda {
+  min-width: 0;
+}
+
+.brand span:last-child,
+.site-nav a,
+.site-nav button,
+.mapa-title-card h1,
+.mapa-title-card p,
+.estadio-card,
+.legenda {
+  overflow-wrap: anywhere;
+}
+
+.estadio-card {
+  max-width: calc(100vw - 32px);
+}
+
+@media (max-width: 480px) {
+  .mapa-page {
+    min-height: 100svh;
+    overflow-y: auto;
+  }
+
+  .mapa-interface {
+    width: min(100% - 16px, 1320px);
+  }
+
+  .mapa-topbar {
+    position: relative;
+    gap: 12px;
+  }
+
+  .brand {
+    min-width: 0;
+  }
+
+  .site-nav {
+    width: 100%;
+  }
+
+  .site-nav a,
+  .site-nav button {
+    flex: 1 1 46%;
+    min-height: 40px;
+    padding: 7px 9px;
+    line-height: 1.15;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .mapa-floating-info {
+    gap: 10px;
+  }
+
+  .mapa-title-card,
+  .mapa-stats-card,
+  .legenda {
+    padding: 14px;
+  }
+
+  .mapa-title-card h1 {
+    font-size: clamp(1.75rem, 11vw, 2.6rem);
+    line-height: 1;
+  }
+
+  .estadio-card {
+    width: min(205px, calc(100vw - 28px));
+  }
+}
+
+@media (max-width: 340px) {
+  .mapa-interface {
+    width: min(100% - 12px, 1320px);
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .brand strong {
+    font-size: 0.86rem;
+  }
+
+  .brand small {
+    font-size: 0.68rem;
+  }
+
+  .site-nav a,
+  .site-nav button {
+    flex-basis: 100%;
+  }
+}

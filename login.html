@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#050b12">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Copa 2026">
+  <link rel="apple-touch-icon" href="img/icon-192.png">
+  <title>Login - Calendário da Copa</title>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+  <main class="login-page">
+    <section class="login-card">
+      <div class="login-header">
+        <p class="tag">World Cup 2026</p>
+        <h1>Entrar na conta</h1>
+        <p>Faça login para salvar jogos, estádios favoritos e preferências.</p>
+      </div>
+
+      <form id="login-form" class="login-form">
+        <div class="input-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" placeholder="seuemail@gmail.com" required>
+        </div>
+
+        <div class="input-group">
+          <label for="password">Senha</label>
+          <input type="password" id="password" placeholder="Digite sua senha" required minlength="6">
+        </div>
+
+        <button type="submit" class="btn-primary">Entrar</button>
+        <button type="button" id="signup-btn" class="btn-secondary">Criar conta</button>
+        <p id="login-status" class="login-status" aria-live="polite"></p>
+      </form>
+
+      <div class="login-footer">
+        <a href="index.html">Voltar para o calendário</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabaseClient.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/login.js"></script>
+  <script src="js/pwa.js"></script>
+</body>
+</html>

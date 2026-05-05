@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#050b12">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Copa 2026">
+  <link rel="apple-touch-icon" href="img/icon-192.png">
+  <title>Calendário da Copa do Mundo</title>
+  <link rel="stylesheet" href="css/stayle.css">
+</head>
+<body>
+  <div id="opening-video-overlay" class="opening-video-overlay" hidden>
+  <video id="opening-video" class="opening-video" playsinline preload="auto">
+    <source src="video/abertura-copa.mp4.mp4" type="video/mp4">
+    Seu navegador não suporta vídeo.
+  </video>
+
+  <div class="opening-controls">
+    <button id="toggle-opening-sound" class="toggle-opening-sound" type="button">
+      🔇 Mutar
+    </button>
+
+    <button id="close-opening-video" class="close-opening-video" type="button" aria-label="Fechar vídeo de abertura">
+      ×
+    </button>
+  </div>
+</div>
+  <div class="page-bg"></div>
+
+  <main class="container">
+    <header class="top-shell">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">26</span>
+        <span>
+          <strong>World Cup</strong>
+          <small>Calendar Hub</small>
+        </span>
+      </a>
+
+      <nav class="site-nav" data-auth-nav></nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <p class="tag">World Cup calendar</p>
+
+        <h1>Calendário da Copa do Mundo</h1>
+
+        <p class="subtitle">
+          Visualize datas, horários, estádios e favorite os jogos que você quer acompanhar durante a Copa de 2026.
+        </p>
+
+        <div class="hero-actions">
+          <a href="grupos.html" class="hero-link primary">Ver grupos</a>
+          <a href="estadios.html" class="hero-link">Mapa dos estádios</a>
+        </div>
+      </div>
+
+      <div class="hero-panel countdown-panel">
+        <span class="panel-label">Abertura da Copa em:</span>
+
+        <div class="hero-kpi countdown-kpi">
+          <strong id="dias-copa">--</strong>
+          <span>dias para o primeiro jogo</span>
+        </div>
+
+        <div class="opening-match">
+          <strong>México x África do Sul</strong>
+          <span>Estádio Azteca • 11 de junho de 2026</span>
+        </div>
+
+        <div class="mini-info">
+          <span>48 seleções</span>
+          <span>16 sedes</span>
+          <span>104 jogos</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="filtros">
+      <div class="filter-head">
+        <div>
+          <p class="tag compact">Filtros</p>
+          <h2>Encontre partidas rapidamente</h2>
+        </div>
+
+        <p class="contador">Jogos exibidos: <strong id="total-jogos">0</strong></p>
+      </div>
+
+      <div class="field">
+        <label for="filtro-time">Buscar por time</label>
+        <input id="filtro-time" type="text" placeholder="Ex.: Brasil, Argentina, Japão...">
+      </div>
+
+      <div class="field">
+        <label for="filtro-fase">Fase</label>
+        <select id="filtro-fase">
+          <option value="todas">Todas</option>
+        </select>
+      </div>
+
+      <div class="visualizacao" aria-label="Escolha o modo de visualização">
+        <button class="view-btn is-active" type="button" data-view="lista">Lista</button>
+        <button class="view-btn" type="button" data-view="calendario">Calendário</button>
+      </div>
+    </section>
+
+    <p id="app-message" class="app-message" aria-live="polite"></p>
+
+    <section id="calendario" class="calendario" aria-live="polite"></section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabaseClient.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/userData.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/pwa.js"></script>
+</body>
+</html>
