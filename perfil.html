@@ -35,7 +35,7 @@
         <h1>Perfil</h1>
 
         <p>
-          Personalize sua experiência na Copa 2026. Salve seu nome, username, foto de perfil, seleção favorita e preferências da conta.
+          Personalize sua experiência na Copa 2026. Salve seu nome, username, foto de perfil e seleção favorita.
         </p>
 
         <div class="hero-actions">
@@ -54,7 +54,7 @@
         </div>
 
         <div class="panel-copy">
-          <strong>Preferências salvas</strong>
+          <strong>Perfil salvo</strong>
           <span>Seus dados ficam ligados à sua conta Supabase.</span>
         </div>
       </aside>
@@ -67,8 +67,8 @@
       </article>
 
       <article>
-        <strong>Preferências</strong>
-        <span>Idioma, tema e notificações futuras.</span>
+        <strong>Favoritos</strong>
+        <span>Jogos, seleções e estádios salvos por usuário.</span>
       </article>
 
       <article>
@@ -79,8 +79,8 @@
 
     <p id="profile-message" class="app-message" aria-live="polite"></p>
 
-    <section class="profile-grid">
-      <form id="profile-form" class="panel">
+    <section class="profile-grid profile-grid-single">
+      <form id="profile-form" class="panel profile-panel-main">
         <div class="panel-header">
           <span class="panel-icon">✦</span>
           <div>
@@ -124,43 +124,6 @@
         </div>
 
         <button type="submit" class="primary-btn">Salvar perfil</button>
-      </form>
-
-      <form id="preferences-form" class="panel">
-        <div class="panel-header">
-          <span class="panel-icon">⚙</span>
-          <div>
-            <h2>Preferências</h2>
-            <p>Configure como você quer acompanhar as informações da Copa.</p>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="language">Idioma</label>
-          <select id="language">
-            <option value="pt-BR">Português do Brasil</option>
-            <option value="en-US">English</option>
-            <option value="es-ES">Español</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="theme">Tema</label>
-          <select id="theme">
-            <option value="dark">Escuro</option>
-            <option value="light">Claro</option>
-          </select>
-        </div>
-
-        <label class="check-row">
-          <input id="receive-notifications" type="checkbox">
-          <span>
-            <strong>Receber notificações</strong>
-            <small>Para lembretes e atualizações futuras dos jogos.</small>
-          </span>
-        </label>
-
-        <button type="submit" class="primary-btn">Salvar preferências</button>
       </form>
     </section>
   </main>

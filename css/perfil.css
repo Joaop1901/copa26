@@ -443,8 +443,17 @@ body::after {
 
 .profile-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 22px;
+}
+
+.profile-grid-single {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.profile-panel-main {
+  width: 100%;
 }
 
 .panel {

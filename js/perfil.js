@@ -1,10 +1,13 @@
 /**
  * perfil.js
- * Lógica da página de perfil com upload de avatar
+ * Lógica da página de perfil com upload de avatar.
+ *
+ * Observação:
+ * O card de preferências foi removido para simplificar a apresentação.
+ * Esta página agora salva apenas dados principais do perfil e avatar.
  */
 
 const profileForm = document.getElementById("profile-form");
-const preferencesForm = document.getElementById("preferences-form");
 const messageEl = document.getElementById("profile-message");
 
 const avatarFileInput = document.getElementById("avatar-file");
@@ -137,7 +140,7 @@ async function carregarPerfil() {
     atualizarPreviewAvatar("");
   } catch (error) {
     console.error("Erro ao carregar perfil:", error);
-    mostrarMensagem("Erro ao carregar dados.", "error");
+    mostrarMensagem("Erro ao carregar dados do perfil.", "error");
   }
 }
 
@@ -168,38 +171,7 @@ async function salvarPerfil() {
     mostrarMensagem("Perfil salvo com sucesso.", "success");
   } catch (error) {
     console.error("Erro ao salvar perfil:", error);
-    mostrarMensagem(error.message || "Erro ao salvar dados.", "error");
-  }
-}
-
-async function carregarPreferencias() {
-  try {
-    const preferences = await userData.getPreferences(currentUser.id);
-
-    if (preferences) {
-      document.getElementById("language").value = preferences.language || "pt-BR";
-      document.getElementById("theme").value = preferences.theme || "dark";
-      document.getElementById("receive-notifications").checked = Boolean(preferences.receive_notifications);
-    }
-  } catch (error) {
-    console.error("Erro ao carregar preferências:", error);
-    mostrarMensagem("Erro ao carregar dados.", "error");
-  }
-}
-
-async function salvarPreferencias() {
-  try {
-    await userData.upsertPreferences({
-      user_id: currentUser.id,
-      language: document.getElementById("language").value,
-      theme: document.getElementById("theme").value,
-      receive_notifications: document.getElementById("receive-notifications").checked
-    });
-
-    mostrarMensagem("Preferências salvas com sucesso.", "success");
-  } catch (error) {
-    console.error("Erro ao salvar preferências:", error);
-    mostrarMensagem("Erro ao salvar dados.", "error");
+    mostrarMensagem(error.message || "Erro ao salvar perfil.", "error");
   }
 }
 
@@ -220,15 +192,12 @@ if (avatarFileInput) {
   });
 }
 
-profileForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  await salvarPerfil();
-});
-
-preferencesForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  await salvarPreferencias();
-});
+if (profileForm) {
+  profileForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    await salvarPerfil();
+  });
+}
 
 async function iniciarPerfil() {
   currentUser = await requireLogin();
@@ -236,16 +205,7 @@ async function iniciarPerfil() {
   if (!currentUser) return;
 
   await updateHeaderUser();
-
-  try {
-    await Promise.all([
-      carregarPerfil(),
-      carregarPreferencias()
-    ]);
-  } catch (error) {
-    console.error("Erro ao iniciar perfil:", error);
-    mostrarMensagem("Erro ao carregar página.", "error");
-  }
+  await carregarPerfil();
 }
 
 iniciarPerfil();
