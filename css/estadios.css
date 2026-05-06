@@ -726,7 +726,6 @@ body {
 
 .estadio-card.open-left.is-open {
   transform: translate(-100%, -50%) scale(1);
-<<<<<<< HEAD
 }
 
 /* Ajustes de fluidez para telas muito estreitas e dimensoes incomuns */
@@ -845,6 +844,3 @@ textarea {
     flex-basis: 100%;
   }
 }
-=======
-}
->>>>>>> e790bc1fd37f666725af3369461776a3b880de05
