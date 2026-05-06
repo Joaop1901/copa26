@@ -1,107 +1,131 @@
-# Calendário da Copa 2026
+# Calendario da Copa 2026
 
-Projeto web interativo para acompanhar a Copa do Mundo FIFA 2026, com calendário de jogos, grupos, mapa de estádios, notícias, perfil do usuário e sistema de favoritos.
+Projeto web interativo para acompanhar a Copa do Mundo FIFA 2026, com calendario de jogos, grupos, mapa de estadios, noticias, perfil do usuario e sistema de favoritos.
 
 ## Objetivo
 
-O objetivo do projeto é criar uma plataforma completa para que o usuário consiga acompanhar a Copa de 2026 de forma personalizada. O sistema permite login/cadastro, escolha de seleções acompanhadas, favoritos de jogos e estádios, edição de perfil, avatar e consulta de notícias.
+O objetivo do projeto e criar uma plataforma completa para que o usuario consiga acompanhar a Copa de 2026 de forma personalizada. O sistema permite login/cadastro, escolha de selecoes acompanhadas, favoritos de jogos e estadios, edicao de perfil, avatar e consulta de noticias.
 
-## Tecnologias utilizadas
+## Status do projeto
 
-- HTML5
-- CSS3
-- JavaScript puro
-- Supabase Auth
-- Supabase Database
-- Supabase Storage
-- JSON local com jogos da Copa 2026
-- GNews API para notícias
-- PWA para adaptação mobile
-- Electron para versão desktop
+- Versao Web funcional publicada em ambiente de hospedagem estatica.
+- Estrutura PWA para instalacao no celular.
+- Estrutura desktop com Electron.
+- Supabase usado para autenticacao, banco de dados e avatar.
+- Documentacao tecnica inicial com banco de dados, classes e casos de uso.
 
-## Páginas do sistema
+## Tecnologias, bibliotecas e servicos utilizados
 
-| Página | Função |
-|---|---|
-| `index.html` | Calendário dos jogos, filtros, favoritos e vídeo de abertura |
-| `login.html` | Login e cadastro de usuários |
-| `grupos.html` | Grupos e seleções acompanhadas |
-| `estadios.html` | Mapa interativo dos estádios e favoritos |
-| `favoritos.html` | Central de favoritos do usuário |
-| `perfil.html` | Dados do usuário, preferências e avatar |
-| `noticias.html` | Notícias da Copa 2026 com API e fallback local |
+| Nome | Versao/uso | Finalidade |
+|---|---|---|
+| HTML5 | Padrao Web | Estrutura das paginas. |
+| CSS3 | Padrao Web | Estilizacao, responsividade e identidade visual. |
+| JavaScript | ES6+ | Logica de interacao e regras do frontend. |
+| `@supabase/supabase-js` | v2 via CDN | Comunicacao com Supabase Auth, Database e Storage. |
+| Supabase Auth | Servico externo | Login, cadastro, sessao e logout. |
+| Supabase Database | PostgreSQL gerenciado | Persistencia de perfil, favoritos e preferencias. |
+| Supabase Storage | Bucket `avatars` | Upload e armazenamento de avatar. |
+| GNews API | REST API | Busca de noticias da Copa. |
+| PWA APIs | Manifest + Service Worker | Instalacao mobile e cache. |
+| Electron | `^31.0.0` | Base para versao desktop. |
+| Netlify | Hospedagem estatica | Deploy da versao Web/PWA. |
 
 ## Funcionalidades implementadas
 
 - Cadastro e login com Supabase Auth.
-- Navbar dinâmica de acordo com usuário logado.
-- Calendário com 104 jogos carregados por JSON local.
-- Filtro por seleção e por fase.
-- Visualização em lista e calendário.
+- Navbar dinamica de acordo com usuario logado.
+- Calendario com 104 jogos carregados por JSON local.
+- Filtro por selecao e fase.
 - Favoritos manuais de jogos.
-- Seleções acompanhadas.
-- Jogos das seleções acompanhadas marcados automaticamente com estrela.
+- Selecoes acompanhadas.
+- Jogos das selecoes acompanhadas marcados automaticamente.
 - Estádios favoritos salvos no Supabase.
-- Perfil do usuário com dados e avatar.
-- Upload de avatar pelo Supabase Storage no bucket `avatars`.
-- Mapa interativo com pins dos estádios.
-- Filtro dos estádios por país: Canadá, EUA e México.
-- Página de notícias com GNews API e fallback local.
-- Vídeo de abertura após login/cadastro.
-- Estrutura inicial de PWA para mobile.
-- Estrutura inicial de Electron para desktop.
+- Perfil do usuario com dados e avatar.
+- Upload de avatar pelo Supabase Storage.
+- Mapa interativo com pins dos estadios.
+- Filtro dos estadios por pais: Canada, EUA e Mexico.
+- Pagina de noticias com GNews API e fallback local.
+- Video de abertura apos login/cadastro.
+- Estrutura PWA para mobile.
+- Estrutura Electron para desktop.
+
+## Principios de POO aplicados
+
+O projeto possui uma camada de modelos orientada a objetos em `js/models.js`, representando entidades como usuario, jogo, estadio, noticia e favoritos.
+
+Principios utilizados:
+
+- **Encapsulamento:** cada classe concentra seus dados e metodos.
+- **Heranca:** classes principais herdam de `EntidadeBase`.
+- **Polimorfismo:** metodos como `validar()` podem ter comportamentos diferentes em cada classe.
+- **Abstracao:** repositorios e servicos escondem detalhes de persistencia e APIs externas.
 
 ## Estrutura de pastas
 
 ```txt
 .
-├── css/
-│   ├── estadios.css
-│   ├── favoritos.css
-│   ├── grupos.css
-│   ├── login.css
-│   ├── noticias.css
-│   ├── perfil.css
-│   └── stayle.css
-├── docs/
+├── css/                  # Estilos por pagina
+├── docs/                 # Documentacao tecnica
 │   ├── API.md
-│   ├── DEPLOY.md
 │   ├── DER.md
-│   └── RELATORIO_FASE_1.md
-├── img/
-│   ├── mapa-estadios.png
-│   ├── icon-192.png
-│   └── icon-512.png
-├── js/
+│   ├── DIAGRAMA_CLASSES.md
+│   ├── CASOS_DE_USO.md
+│   ├── DOCUMENTACAO_TECNICA_V1.md
+│   └── DEPLOY.md
+├── img/                  # Imagens, mapa e icones
+├── js/                   # Scripts JavaScript
 │   ├── auth.js
+│   ├── login.js
+│   ├── index.js
+│   ├── grupos.js
 │   ├── estadios.js
 │   ├── favoritos.js
-│   ├── grupos.js
-│   ├── index.js
-│   ├── login.js
-│   ├── noticias.js
 │   ├── perfil.js
+│   ├── noticias.js
+│   ├── models.js
 │   ├── pwa.js
-│   ├── supabaseClient.js
-│   └── userData.js
-├── supabase/
-│   └── schema.sql
-├── desktop/
-│   ├── main.js
-│   └── package.json
-├── video/
-│   └── abertura-copa.mp4.mp4
-├── copa.json
-├── manifest.json
-├── service-worker.js
+│   └── supabaseClient.js
+├── desktop/              # Estrutura Electron
+├── supabase/             # Script SQL do banco
+├── video/                # Video de abertura
+├── copa.json             # Base local dos jogos
+├── manifest.json         # Configuracao PWA
+├── service-worker.js     # Service Worker/cache
 └── README.md
+```
+
+## Paginas do sistema
+
+| Pagina | Funcao |
+|---|---|
+| `index.html` | Calendario dos jogos, filtros, favoritos e video de abertura. |
+| `login.html` | Login e cadastro de usuarios. |
+| `grupos.html` | Grupos e selecoes acompanhadas. |
+| `estadios.html` | Mapa interativo dos estadios e favoritos. |
+| `favoritos.html` | Central de favoritos do usuario. |
+| `perfil.html` | Dados do usuario, preferencias e avatar. |
+| `noticias.html` | Noticias da Copa 2026 com API e fallback local. |
+
+## Prints do projeto funcionando
+
+> Substitua os caminhos abaixo pelos prints reais do projeto dentro da pasta `docs/prints/`.
+
+```md
+![Calendario](docs/prints/01-calendario.png)
+![Login](docs/prints/02-login.png)
+![Grupos](docs/prints/03-grupos.png)
+![Estadios](docs/prints/04-estadios.png)
+![Favoritos](docs/prints/05-favoritos.png)
+![Perfil](docs/prints/06-perfil.png)
+![Noticias](docs/prints/07-noticias.png)
+![PWA Mobile](docs/prints/08-pwa-mobile.png)
 ```
 
 ## Como rodar localmente
 
 1. Abra a pasta do projeto no Visual Studio Code.
-2. Instale a extensão Live Server, caso ainda não tenha.
-3. Clique com o botão direito em `index.html`.
+2. Instale a extensao Live Server.
+3. Clique com o botao direito em `index.html`.
 4. Selecione **Open with Live Server**.
 5. Acesse a URL local exibida pelo Live Server.
 
@@ -111,15 +135,23 @@ Exemplo:
 http://127.0.0.1:5500/index.html
 ```
 
-## Configuração do Supabase
+## Como rodar a versao desktop
 
-O projeto usa Supabase para autenticação, banco de dados e storage. O arquivo principal de conexão é:
+```bash
+cd desktop
+npm install
+npm start
+```
+
+## Configuracao do Supabase
+
+O projeto usa Supabase para autenticacao, banco de dados e storage. O arquivo principal de conexao e:
 
 ```txt
 js/supabaseClient.js
 ```
 
-Para reproduzir o banco, use como base o arquivo:
+Para reproduzir o banco, use como base:
 
 ```txt
 supabase/schema.sql
@@ -146,36 +178,44 @@ O projeto possui estrutura de PWA com:
 - `manifest.json`
 - `service-worker.js`
 - `js/pwa.js`
-- ícones em `img/icon-192.png` e `img/icon-512.png`
+- icones em `img/icon-192.png` e `img/icon-512.png`
 
-Com isso, o site pode ser instalado em dispositivos compatíveis, funcionando como uma aplicação mobile simples.
+Com isso, o site pode ser instalado em dispositivos compativeis, funcionando como uma aplicacao mobile simples.
 
-## Desktop/Electron
+## Deploy
 
-A pasta `desktop/` contém uma estrutura inicial para empacotar o projeto como aplicativo desktop com Electron.
+Configuracao usada/recomendada no Netlify:
 
-Para testar futuramente:
-
-```bash
-cd desktop
-npm install
-npm start
+```txt
+Branch: main
+Base directory: vazio
+Build command: vazio
+Publish directory: .
 ```
 
-## Deploy sugerido
+## Documentacao tecnica
 
-- Frontend Web: Vercel, Netlify ou GitHub Pages.
-- Backend/Auth/Database/Storage: Supabase.
-- Mobile: PWA instalável pelo navegador.
-- Desktop: Electron.
+Arquivos principais:
 
-## Observações de segurança
+- `docs/DOCUMENTACAO_TECNICA_V1.md`
+- `docs/DER.md`
+- `docs/DIAGRAMA_CLASSES.md`
+- `docs/CASOS_DE_USO.md`
+- `docs/API.md`
+- `docs/DEPLOY.md`
 
-- Nunca suba senhas reais para o GitHub.
-- Nunca use `service_role key` do Supabase no frontend.
-- A `anon key` do Supabase pode ser usada no frontend, desde que as políticas RLS estejam configuradas corretamente.
-- Chaves de APIs públicas no frontend devem ter restrições sempre que possível.
+## Observacoes de seguranca
 
-## Status da Fase 1
+- Nunca subir senhas reais para o GitHub.
+- Nunca usar `service_role key` do Supabase no frontend.
+- A `anon key` do Supabase pode ser usada no frontend se as politicas RLS estiverem configuradas corretamente.
+- Chaves de APIs publicas no frontend devem ter restricoes sempre que possivel.
 
-A versão web já possui as principais funcionalidades implementadas. As partes adicionadas nesta fase complementam a entrega com documentação, PWA/mobile, estrutura desktop e guia de deploy.
+## Referencias
+
+- Supabase Docs: https://supabase.com/docs
+- Electron Docs: https://www.electronjs.org/docs/latest
+- MDN PWA: https://developer.mozilla.org/docs/Web/Progressive_web_apps
+- Netlify Docs: https://docs.netlify.com
+- GitHub Docs: https://docs.github.com
+- GNews API: https://gnews.io/docs
