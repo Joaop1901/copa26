@@ -660,3 +660,176 @@ textarea {
     padding: 14px;
   }
 }
+
+
+/* =====================================================
+   AJUSTE MOBILE FINAL - PWA / CELULAR
+   Compacta a navegação, melhora o hero e deixa o aviso
+   da API/fallback com aparência de informação.
+===================================================== */
+.app-message.info {
+  color: #ffd27a;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 159, 28, 0.24);
+  border-radius: 16px;
+  background: rgba(255, 159, 28, 0.08);
+}
+
+@media (max-width: 768px) {
+  .news-page {
+    width: min(100% - 20px, 1220px);
+    padding-top: 10px;
+  }
+
+  .top-shell {
+    position: relative;
+    top: 0;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding: 12px;
+    border-radius: 24px;
+  }
+
+  .site-nav {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .site-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .site-nav a,
+  .site-nav button {
+    flex: 0 0 auto;
+    min-height: 38px;
+    padding: 0 14px;
+    white-space: nowrap;
+    font-size: 0.84rem;
+  }
+
+  .news-hero {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 20px;
+    margin-bottom: 18px;
+    border-radius: 24px;
+  }
+
+  .news-hero h1 {
+    max-width: 100%;
+    font-size: clamp(2.2rem, 11vw, 3.6rem);
+    line-height: 0.98;
+    letter-spacing: -1px;
+  }
+
+  .news-hero p {
+    margin-top: 14px;
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  .hero-actions {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .hero-link {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .hero-panel {
+    min-height: auto;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .panel-label {
+    grid-column: 1 / -1;
+  }
+
+  .news-icon {
+    font-size: 2.6rem;
+  }
+
+  .news-tools {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  input,
+  select,
+  .reload-btn {
+    min-height: 48px;
+    font-size: 0.95rem;
+  }
+
+  .reload-btn {
+    width: 100%;
+    border-radius: 16px;
+  }
+
+  .app-message {
+    margin: 14px 0;
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  .news-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .news-image {
+    height: 165px;
+  }
+
+  .news-content {
+    padding: 16px;
+  }
+
+  .news-meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .news-content a {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .news-page {
+    width: min(100% - 16px, 1220px);
+  }
+
+  .news-hero,
+  .news-tools,
+  .news-content {
+    padding: 15px;
+  }
+
+  .news-hero h1 {
+    font-size: clamp(2rem, 12vw, 3rem);
+  }
+
+  .tag {
+    letter-spacing: 2px;
+  }
+}

@@ -844,3 +844,214 @@ textarea {
     flex-basis: 100%;
   }
 }
+
+
+/* =====================================================
+   AJUSTE MOBILE FINAL - PWA / CELULAR
+   Transforma o mapa em um bloco próprio no mobile para
+   evitar que os cards da interface cubram os pins.
+===================================================== */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .mapa-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+    overflow: visible;
+    background:
+      radial-gradient(circle at 50% 8%, rgba(255, 47, 125, 0.16), transparent 30%),
+      radial-gradient(circle at 10% 38%, rgba(255, 107, 91, 0.13), transparent 30%),
+      var(--bg);
+  }
+
+  .mapa-interface {
+    order: 1;
+    width: min(100% - 20px, 1320px);
+    padding: 10px 0 12px;
+  }
+
+  .mapa-wrapper {
+    order: 2;
+    position: relative;
+    inset: auto;
+    z-index: 2;
+    width: min(100% - 20px, 1320px);
+    height: min(74svh, 720px);
+    min-height: 560px;
+    margin: 0 auto 22px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 28px;
+    overflow: hidden;
+    pointer-events: auto;
+    background: rgba(5, 11, 18, 0.74);
+    box-shadow: 0 28px 90px rgba(0, 0, 0, 0.38);
+  }
+
+  .mapa-base {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    pointer-events: auto;
+    background-size: cover;
+    background-position: center 54%;
+  }
+
+  .estadios-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 80;
+    pointer-events: none;
+  }
+
+  .estadio-pin {
+    width: 16px;
+    height: 16px;
+    pointer-events: auto;
+  }
+
+  .estadio-pin::before {
+    inset: -9px;
+  }
+
+  .estadio-pin::after {
+    inset: 4px;
+  }
+
+  .estadio-card {
+    width: min(240px, calc(100vw - 42px));
+    max-width: calc(100vw - 42px);
+    z-index: 95;
+  }
+
+  .legenda {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 12px 13px;
+    border-radius: 18px;
+    background: rgba(5, 11, 18, 0.72);
+  }
+
+  .legenda p {
+    margin: 7px 0;
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
+
+  .mapa-topbar {
+    position: relative;
+    top: 0;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 24px;
+  }
+
+  .site-nav {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .site-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .site-nav a,
+  .site-nav button {
+    flex: 0 0 auto;
+    min-height: 38px;
+    padding: 0 14px;
+    white-space: nowrap;
+    font-size: 0.84rem;
+  }
+
+  .mapa-floating-info {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .mapa-title-card,
+  .mapa-stats-card {
+    width: 100%;
+    max-width: none;
+    border-radius: 22px;
+    background: rgba(5, 11, 18, 0.68);
+  }
+
+  .mapa-title-card h1 {
+    max-width: 100%;
+    font-size: clamp(2.05rem, 11vw, 3.25rem);
+    line-height: 0.98;
+  }
+
+  .mapa-title-card p {
+    max-width: 100%;
+  }
+
+  .mapa-stats-card {
+    min-height: auto;
+  }
+
+  .info-number {
+    margin-top: 14px;
+  }
+
+  .info-number strong {
+    font-size: 3rem;
+  }
+
+  .info-chips {
+    gap: 8px;
+  }
+
+  .country-filter-btn {
+    min-height: 34px;
+    padding: 0 13px;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .mapa-interface,
+  .mapa-wrapper {
+    width: min(100% - 16px, 1320px);
+  }
+
+  .mapa-wrapper {
+    height: 640px;
+    min-height: 610px;
+    border-radius: 24px;
+  }
+
+  .mapa-title-card,
+  .mapa-stats-card {
+    padding: 14px;
+  }
+
+  .mapa-title-card h1 {
+    font-size: clamp(2rem, 12vw, 3rem);
+  }
+
+  .estadio-card {
+    width: min(225px, calc(100vw - 34px));
+    padding: 13px;
+  }
+
+  .favorite-stadium-btn {
+    min-height: 38px;
+    font-size: 0.82rem;
+  }
+}

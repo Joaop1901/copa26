@@ -261,7 +261,7 @@ async function buscarNoticias() {
       return;
     }
 
-    mostrarMensagem("A API respondeu, mas não encontrou notícias com esses filtros. Mostrando notícias fixas do projeto.", "error");
+    mostrarMensagem("A API respondeu, mas não encontrou notícias com esses filtros. Mostrando notícias fixas do projeto.", "info");
   }
 }
 

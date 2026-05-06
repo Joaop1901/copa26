@@ -5,7 +5,7 @@
  * Evita cache de vídeos/áudios e respostas parciais 206.
  */
 
-const CACHE_NAME = "copa-2026-v3";
+const CACHE_NAME = "copa-2026-v5";
 
 const ASSETS_TO_CACHE = [
   "./",
