@@ -1,0 +1,36 @@
+flowchart LR
+  Visitante([Visitante])
+  Usuario([Usuario autenticado])
+  Auth([Supabase Auth])
+  DB([Supabase Database])
+  Storage([Supabase Storage])
+  GNews([GNews API])
+  UC1((Visualizar calendario))
+  UC2((Filtrar jogos))
+  UC3((Cadastrar/Login))
+  UC4((Favoritar jogos))
+  UC5((Acompanhar selecoes))
+  UC6((Favoritar estadios))
+  UC7((Editar perfil/avatar))
+  UC8((Buscar noticias))
+  UC9((Instalar PWA))
+  Visitante --> UC1
+  Visitante --> UC2
+  Visitante --> UC3
+  Visitante --> UC8
+  Visitante --> UC9
+  Usuario --> UC1
+  Usuario --> UC2
+  Usuario --> UC4
+  Usuario --> UC5
+  Usuario --> UC6
+  Usuario --> UC7
+  Usuario --> UC8
+  Usuario --> UC9
+  UC3 --> Auth
+  UC4 --> DB
+  UC5 --> DB
+  UC6 --> DB
+  UC7 --> DB
+  UC7 --> Storage
+  UC8 --> GNews

@@ -1,0 +1,16 @@
+classDiagram
+  EntidadeBase <|-- Usuario
+  EntidadeBase <|-- Jogo
+  EntidadeBase <|-- Estadio
+  EntidadeBase <|-- Noticia
+  EntidadeBase <|-- Favorito
+  Favorito <|-- JogoFavorito
+  Favorito <|-- EstadioFavorito
+  EntidadeBase <|-- SelecaoAcompanhada
+  Usuario "1" --> "0..*" JogoFavorito : favorita
+  Usuario "1" --> "0..*" EstadioFavorito : favorita
+  Usuario "1" --> "0..*" SelecaoAcompanhada : acompanha
+  Jogo "0..*" --> "1" Estadio : ocorre em
+  NoticiasServico --> Noticia : cria
+  FavoritosRepositorio --> JogoFavorito : persiste
+  FavoritosRepositorio --> EstadioFavorito : persiste
