@@ -108,7 +108,7 @@ Principios utilizados:
 
 ## Prints do projeto funcionando
 
-> Substitua os caminhos abaixo pelos prints reais do projeto dentro da pasta `docs/prints/`.
+
 
 ```md
 ![Calendario](docs/prints/01-calendario.png)
@@ -206,9 +206,7 @@ Arquivos principais:
 
 ## Observacoes de seguranca
 
-- Nunca subir senhas reais para o GitHub.
-- Nunca usar `service_role key` do Supabase no frontend.
-- A `anon key` do Supabase pode ser usada no frontend se as politicas RLS estiverem configuradas corretamente.
+- Nunca subir senhas reais .
 - Chaves de APIs publicas no frontend devem ter restricoes sempre que possivel.
 
 ## Referencias
